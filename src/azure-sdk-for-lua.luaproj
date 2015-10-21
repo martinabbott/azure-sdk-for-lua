@@ -30,8 +30,16 @@
     <Folder Include="socket\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crypto\hmacs.lua" />
+    <Compile Include="documentdb\documentdb.lua" />
+    <Compile Include="json\jsonify.lua" />
+    <Compile Include="servicebus\eventhub.lua" />
+    <Compile Include="servicebus\servicebus.lua" />
     <Compile Include="socket\headers.lua" />
     <Compile Include="socket\http.lua" />
+    <Compile Include="storage\blob.lua" />
+    <Compile Include="storage\queue.lua" />
+    <Compile Include="storage\table.lua" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
