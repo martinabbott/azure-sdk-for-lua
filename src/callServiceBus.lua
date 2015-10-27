@@ -15,8 +15,6 @@ local headers = {
         }
 
 
-
-
 local resp = http.get("http://www.example.com",headers)
 
 --print(resp)
