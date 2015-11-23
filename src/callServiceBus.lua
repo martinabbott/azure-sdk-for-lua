@@ -1,20 +1,35 @@
--- Service Bus Sample
--- Martin Abbott
--- 25/10/2015
+local http = require("socket.http")
+local url = require("socket.url")
+local json = require("utils.json")
+local ltn12 = require("ltn12")
+local sas = require("azure.sas")
 
-require("azure.configuration")
-local http = require("lib.socket.http")
+local sasToken = sas.getServiceBusSasToken("http://example.com", "Root", "abc")
+print(sasToken)
 
---print(http)
+local enc = url.escape("sig=sdfdsff")-- .. hash)
+print(enc)
 
-local headers = {
-			["User-Agent"] = "A custom user-agent!",
-			["Host"] = "Minecraft-Computer",
-			["api-key"] = "E1C721069E67E24A94EA73EFB75FA7AD",
-			["Content-Type"] = "application/json; charset=utf-8"
-        }
+local reqheaders = {
+  ["Content-Type"] = "application/json",
+  ["Authorization"] = ""
+  }
 
+local buildingTelemetry = {
+  building = "Library"
+  }		
 
-local resp = http.get("http://www.example.com",headers)
+	
+local httpRequest = json.encode( buildingTelemetry )	
+print(httpRequest)
 
---print(resp)
+local respbody = {}
+
+local result, respcode, respheaders, respstatus = http.request {
+    method = "GET",
+    url = "http://example.com/",
+    sink = ltn12.sink.table(respbody)
+  }
+ 
+respbody = table.concat(respbody) 
+print(respbody)
